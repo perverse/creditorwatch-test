@@ -36,7 +36,9 @@ Most of my shortcuts are based around not wasting time solving already solved pr
 - Using a 3rd party IOC container for dependency injection (rdlowrey/Auryn). I believe a inversion of control container encourages good OOP programming practices when used effectively, and wanted to easily demonstrate that in the project.
 - Using a 3rd party request object builder (Symfony HttpFoundation component). Just a clean way to access properties of the URL and request variables.
 - Using symfony/dotenv to process environment variables. Environment control is important, and this is mainly to facilitate the Google API key without needing to modify git-aware code.
-- I'm not using a templating engine to keep my use of external libraries to a minimum. It's a good thing PHP was originally designed as a templating language ;)
+- I'm not using a templating engine to keep my use of external libraries to a minimum. Raw PHP will work just fine here for my purposes.
+- A lot of the bootstrapping could be a lot more dynamically driven and generated. There is a lot of static binding (the GoogleSearch module doesn't have its own bootstrapper/provider, rather is handled all manually inside the main bootstrapper for example) and concrete classes are used at that level just to save some time and keep the task on a reasonable scope. The task isn't to build my own framework, but build enough wiring so that I can implement my architectural pattern easily. If more time was to be invested I would have some sort of Provider classes for the Modules that are then loaded via a configuration file in the main bootstrapping logic. This wouldn't be a difficult refactor at the current level of complexity.
+- I have done a very messy job on the "routing" in that it only accomodates the exact url patterns expected by this application. Very basic and again, if the task was more oriented towards building my own framework this would be better.
 
 ## Architecture
 I am employing an MVC and SOA-like architecture for this project. The SOA elements come from isolating disparate modules of logic that could be deployed seperately (along with the same bootstrapping) into a more microservices-like architecture. In this case there is only a single module to begin with in the application as per instructions of the task (the GoogleSearch module). The MVC element dictates the layout of the logic that happens within each module. The responsibility of different layers of the stack are as follows. This architecture will should familiar and comfortable to anyone that has used a modern PHP framework with dependency injection.
@@ -45,7 +47,7 @@ I am employing an MVC and SOA-like architecture for this project. The SOA elemen
 This layer is used to bootstrap the various wiring required for the app to function. This includes bootstrapping the service container, application config and routing. This layer selects the different modules to be included into the application stack.
 
 ### Modules
-Modules are discrete, decoupled coolections of data logic relating to a particular business function of the system. They are structured using an MVC-ish pattern. Each module comprises of 4 layers - Controllers, Services, Repositories and Views.
+Modules are discrete, decoupled collections of logic relating to a particular business function of the system. They are structured using an MVC-ish pattern. Each module comprises of 4 layers - Controllers, Services, Repositories and Views.
 
 #### Controller
 The responsibility of the controller layer is to collect data from a request, pass it to the business logic (service) layer and then bind the returns data to a View object. Controllers serve as the HTTP interface to the business logic of the application, and would be replaced by something else if you were to write another interface (such as websockets, CLI, etc) to this logic.
