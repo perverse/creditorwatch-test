@@ -1,0 +1,15 @@
+{
+    "name": "ronniepyne/creditorwatch-test",
+    "description": "Small test app for CreditorWatch job application",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ronnie Pyne",
+            "email": "ronniepyne@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/dotenv": "^4.3"
+    }
+}
