@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Main\Contracts\Repositories;
+namespace App\GoogleSearch\Contracts\Repositories;
 
-interface GoogleSearchRepository
+interface SearchRepository
 {
-    public function getSearchResults(string $query, int $page = 1, int $limit = null);
+    public function getSearchResults(string $query, int $limit = null);
 }

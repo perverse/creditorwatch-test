@@ -2,5 +2,5 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$bootstrap = new Kernal\Bootstrap;
-$bootstrap->run();
+$bootstrap = new Kernel\Bootstrap;
+$bootstrap->run()->send();

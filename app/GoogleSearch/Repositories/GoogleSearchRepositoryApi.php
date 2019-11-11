@@ -2,11 +2,11 @@
 
 namespace App\GoogleSearch\Repositories;
 
-use App\GoogleSearch\Contracts\Repositories\SearchRespository;
+use App\GoogleSearch\Contracts\Repositories\SearchRepository;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Promise as GuzzlePromise;
 
-class GoogleSearchRepositoryApi implements SearchRespository
+class GoogleSearchRepositoryApi implements SearchRepository
 {
     public function __construct(GuzzleClient $guzzle)
     {
@@ -20,6 +20,8 @@ class GoogleSearchRepositoryApi implements SearchRespository
 
         $promises = [];
 
+        // since we have a hard limit of 10 results per page, we'll fire off all requests in
+        // async so that we can get all the results back faster
         for ($i = 1; $i <= $total_pages; $i++) {
             $promises[$i] = $this->guzzle->getAsync('/customsearch/v1', [
                 'query' => $this->parseQueryParameters([

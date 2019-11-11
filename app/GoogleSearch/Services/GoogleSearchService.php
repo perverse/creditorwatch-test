@@ -6,7 +6,8 @@ use App\GoogleSearch\Contracts\Services\GoogleSearchServiceInterface;
 use App\GoogleSearch\Contracts\Repositories\SearchRepository;
 
 /**
- * Undocumented class
+ * The service in charge of getting our search results from google,
+ * parsing them into the data/format we're after and passing them abck to the controller (or other interface)
  */
 class GoogleSearchService implements GoogleSearchServiceInterface
 {
