@@ -11,11 +11,11 @@ use App\GoogleSearch\Contracts\Repositories\SearchRepository;
  */
 class GoogleSearchService implements GoogleSearchServiceInterface
 {
-    protected $search;
+    protected $search_repo;
 
-    public function __construct(SearchRepository $search)
+    public function __construct(SearchRepository $search_repo)
     {
-        $this->search = $search;
+        $this->search_repo = $search_repo;
     }
 
     /**
@@ -28,6 +28,9 @@ class GoogleSearchService implements GoogleSearchServiceInterface
      */
     public function getNumberOfMentionsForQuery(string $query, string $website, int $num_results_to_check = 100)
     {
+        $results = $this->search_repo->getSearchResults($query, $num_results_to_check);
 
+        print_r($results);
+        die();
     }
 }

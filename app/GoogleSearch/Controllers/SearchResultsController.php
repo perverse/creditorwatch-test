@@ -23,7 +23,7 @@ class SearchResultsController extends Controller
     public function results()
     {
         return Views\Listing::make([
-            'search_results' => $this->google_search->getNumberOfMentionsForQuery($this->request->query('query'), $this->request->query('website'), 100)
+            'search_results' => $this->google_search->getNumberOfMentionsForQuery($this->request->query->get('query'), $this->request->query->get('website'), 100)
         ]);
     }
 }

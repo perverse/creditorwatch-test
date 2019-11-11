@@ -22,7 +22,7 @@ class GoogleSearchRepositoryApi implements SearchRepository
 
         // since we have a hard limit of 10 results per page, we'll fire off all requests in
         // async so that we can get all the results back faster
-        for ($i = 1; $i <= $total_pages; $i++) {
+        for ($i = 0; $i < $total_pages; $i++) {
             $promises[$i] = $this->guzzle->getAsync('/customsearch/v1', [
                 'query' => $this->parseQueryParameters([
                     'q' => $query,
@@ -51,8 +51,8 @@ class GoogleSearchRepositoryApi implements SearchRepository
     protected function parseQueryParameters($opts)
     {
         return array_merge($opts, [
-            'cx' => dotenv('GOOGLE_SEARCH_ENGINE_ID'),
-            'key' => dotenv('GOOGLE_API_KEY')
+            'cx' => getenv('GOOGLE_SEARCH_ENGINE_ID'),
+            'key' => getenv('GOOGLE_API_KEY')
         ]);
     }
 }

@@ -33,7 +33,7 @@ class Bootstrap
      */
     protected $routes = [
         'GET' => [
-            '' => 'App\\GoogleSearch\\Contracts\\Controllers\\SearchResultsControllerInterface@index',
+            '/' => 'App\\GoogleSearch\\Contracts\\Controllers\\SearchResultsControllerInterface@index',
             '/results' => 'App\\GoogleSearch\\Contracts\\Controllers\\SearchResultsControllerInterface@results'
         ]
     ];
@@ -129,7 +129,7 @@ class Bootstrap
     {
         $request = $this->injector->make(Request::class);
 
-        $path = $request->getBaseUrl();
+        $path = $request->getPathInfo();
         $request_method = $request->getMethod();
 
         if (isset($this->routes[$request_method]) && isset($this->routes[$request_method][$path])) {
@@ -169,7 +169,7 @@ class Bootstrap
      */
     protected function handleError(\Exception $e)
     {
-        if (!$this->injector) {
+        if (!$this->injector || getenv('APP_ENV') === 'dev') {
             // error has happened earlier in the stack than injector being setup, throw full error
             throw $e;
         }
@@ -263,6 +263,6 @@ class Bootstrap
      */
     protected function makeGoogleApiGuzzleClient()
     {
-        return new GuzzleClient(['base_url' => 'https://www.googleapis.com/']);
+        return new GuzzleClient(['base_uri' => 'https://www.googleapis.com/']);
     }
 }
