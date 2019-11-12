@@ -46,7 +46,7 @@
                             Appearance in position(s)
                         </div>
                         <div class="col-xs-6">
-                            <?= implode(', ', array_keys($search_results)) ?>
+                            <?= (count($search_results) ? implode(', ', array_keys($search_results)) : "0") ?>
                         </div>
                     </div>
                 </div>

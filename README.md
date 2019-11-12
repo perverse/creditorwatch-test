@@ -13,11 +13,16 @@ This application has been built in accordance with the instructions of a technic
     * readline
     * xml
 * Composer (https://getcomposer.org/download/)
+* A Google Custom Search engine setup with JSON RESTful API Access (set this up pointing to a blank website like https://icanhazip.com so that it doesn't muddy the search results). The engine must also be set up to include sites external to its designated search site.
+* A Google API key that has access to the aforementioned GCSE.
 
 ### Running with Docker
 * Docker CLI
 
 ## Running the application
+
+## Setup
+* Copy .env.example to .env and fill in the required environment variables (all variables in the example are required)
 
 ### Running Locally
 * Clone this repository - `git clone https://github.com/perverse/creditorwatch-test`
@@ -63,14 +68,15 @@ This is the data logic layer of a module. Repositories are used by services to t
 These are the presentation logic of the system. Views take data from services (facilitated by controllers) and bind it to html/json/xml/other outputs from the system.
 
 ## Shortcuts
-Most of my shortcuts are based around not wasting time solving already solved problems within the PHP community (without employing a framework, as stipulated in the task instructions). These are components that certainly could be built  in addition to the rest of the project, but for brevity and to focus time on the business logic of the task I've chosen to employ some external libraries. I've effectively strung together my own micro framework in doing so.
+Most of my shortcuts are based around not wasting time solving already solved problems within the PHP community (without employing a framework, as stipulated in the task instructions). These are components that certainly could be built  in addition to the rest of the project, but for brevity and to focus time on the business logic of the task I've chosen to employ some external libraries. I've effectively (and somewhat accidentally) strung together my own micro framework in doing so.
 * Using a 3rd party IOC container for dependency injection (rdlowrey/Auryn). I believe a inversion of control container encourages good OOP programming practices when used effectively, and wanted to easily demonstrate that in the project.
-* Using a 3rd party request object builder (Symfony HttpFoundation component). Just a clean way to access properties of the URL and request variables.
+* Using a 3rd party request and response object builder (Symfony HttpFoundation component). Just a clean way to access properties of the URL and request variables, as well as format the http response without getting mixed up in the nitty gritty of mucking about with the PHP superglobals, etc.
 * Using vlucas/phpdotenv to process environment variables. Environment control is important, and this is mainly to facilitate the Google API key without needing to modify git-aware code.
 * I'm not using a templating engine to keep my use of external libraries to a minimum. Raw PHP will work just fine here for my purposes.
 * A lot of the bootstrapping could be a lot more dynamically driven and generated. There is a lot of static binding (the GoogleSearch module doesn't have its own bootstrapper/provider, rather is handled all manually inside the main bootstrapper for example) and concrete classes are used at that level just to save some time and keep the task on a reasonable scope. The task isn't to build my own framework, but build enough wiring so that I can implement my architectural pattern easily. If more time was to be invested I would have some sort of Provider classes for the Modules that are then loaded via a configuration file in the main bootstrapping logic. This wouldn't be a difficult refactor at the current level of complexity.
 * I have done a very messy job on the "routing" in that it only accomodates the exact url patterns expected by this application. Very basic and again, if the task was more oriented towards building my own framework this would be better.
 * The testing could be far more robust (including testing my bootstrapper). I wanted to illustrate that my architecture was fully testable without going too overboard for the scale of this example.
+* I have ommitted some chunks of internal documentation in places where the code speaks for itself. Most of the nitty gritty is well covered, though.
 
 ## Regrets
 I had some regrets while rolling this out...
