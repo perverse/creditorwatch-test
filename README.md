@@ -39,7 +39,7 @@ Once you have the application running using one of the above methods, you can ru
 * From the repository directory run `./vendor/bin/phpunit --testdox`
 
 ### Running with docker
-* From the repository directory run `docker-compose exec web ./var/www/html/vendor/phpunit/bin/phpunit`
+* From the repository directory run `docker exec -it ronnie-googlecheck-test-app-container bash -c "cd /usr/src/myapp && ./vendor/bin/phpunit --testdox"` while the Docker container is running
 
 ## Architecture
 I am employing an MVC and SOA-like architecture for this project. The SOA elements come from isolating disparate modules of logic that could be deployed seperately (along with the same bootstrapping) into a more microservices-like architecture. In this case there is only a single module to begin with in the application as per instructions of the task (the GoogleSearch module). The MVC element dictates the layout of the logic that happens within each module. The responsibility of different layers of the stack are as follows. This architecture will should familiar and comfortable to anyone that has used a modern PHP framework with dependency injection.
