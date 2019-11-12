@@ -22,14 +22,17 @@ class SearchResultsController extends Controller
 
     public function results()
     {
-        $results_to_check = 10; // we could drive this by the front end if we wanted...
-        $results = $this->google_search->getMentionResultsForQuery($this->request->query->get('query'), $this->request->query->get('website'), $results_to_check);
+        $results_to_check = 100; // we could drive this by the front end if we wanted...
+        $website = strtolower($this->request->query->get('website')); // probably best we lowercase this for comparisons sake later
+        $query = $this->request->query->get('query');
+
+        $results = $this->google_search->getMentionResultsForQuery($query, $website, $results_to_check);
 
         return Views\Listing::make([
             'search_results' => $results,
             'total_mentions' => $this->google_search->countMentionsInResults($results),
-            'query' => $this->request->query->get('query'),
-            'website' => $this->request->query->get('website'),
+            'query' => $query,
+            'website' => $website,
             'total_searched' => $results_to_check
         ]);
     }

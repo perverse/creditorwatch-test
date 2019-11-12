@@ -169,10 +169,10 @@ class Bootstrap
      */
     protected function handleError(\Exception $e)
     {
-        if (!$this->injector || getenv('APP_ENV') === 'dev') {
+        /*if (!$this->injector || getenv('APP_ENV') === 'dev') {
             // error has happened earlier in the stack than injector being setup, throw full error
             throw $e;
-        }
+        }*/
 
         $response = $this->injector->make(Response::class);
 
