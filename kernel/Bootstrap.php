@@ -153,7 +153,7 @@ class Bootstrap
      * @param string $route
      * @return Kernel\Contracts\View
      */
-    protected function getViewFromRoute($route)
+    protected function getViewFromRoute(string $route)
     {
         list($controller_name, $controller_method) = $this->parseRoute($route);
         $controller = $this->injector->make($controller_name);
