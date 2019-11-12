@@ -1,5 +1,5 @@
 # CreditorWatch Technical Test
-This application has been built in accordance with the instructions of a technical test as part of an interview process for CreditorWatch.
+This application has been built in accordance with the instructions of a technical test as part of an interview process for CreditorWatch. Apologies if I have gone way overkill with this, but I wanted to make sure I could illustrate a robust set of features and architectural designs! Typically a lot of what I have done in this project would traditionally be heavy lifting done by a 3rd party framework, but I wanted to illustrate how fundamentally I understand and can piece together these architectures. It's also pretty cool to keep request times as low as possible not booting up a whole framework! Anyway... on with the show...
 
 ## Dependencies
 
