@@ -3,6 +3,10 @@ This application has been built in accordance with the instructions of a technic
 
 ## Dependencies
 
+### Global
+* A Google Custom Search engine setup with JSON RESTful API Access (set this up pointing to a blank website like https://icanhazip.com so that it doesn't muddy the search results). The engine must also be set up to include sites external to its designated search site.
+* A Google API key that has access to the aforementioned GCSE.
+
 ### Running Locally
 * PHP 7.2+ with the following modules installed (all are included auitomatically using the docker method):
     * common
@@ -13,15 +17,13 @@ This application has been built in accordance with the instructions of a technic
     * readline
     * xml
 * Composer (https://getcomposer.org/download/)
-* A Google Custom Search engine setup with JSON RESTful API Access (set this up pointing to a blank website like https://icanhazip.com so that it doesn't muddy the search results). The engine must also be set up to include sites external to its designated search site.
-* A Google API key that has access to the aforementioned GCSE.
 
 ### Running with Docker
 * Docker CLI
 
 ## Running the application
 
-## Setup
+### Setup
 * Copy .env.example to .env and fill in the required environment variables (all variables in the example are required)
 
 ### Running Locally
