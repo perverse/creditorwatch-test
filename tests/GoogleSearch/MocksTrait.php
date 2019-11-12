@@ -47,6 +47,11 @@ trait MocksTrait
         return $repository_mock;
     }
 
+    public function mockGoogleSearchServiceBasic()
+    {
+        return $this->createMock(GoogleSearchServiceInterface::class);
+    }
+
     public function mockGoogleSearchServiceForSearch($search_term, $website, $limit)
     {
         $service_mock = $this->createMock(GoogleSearchServiceInterface::class);

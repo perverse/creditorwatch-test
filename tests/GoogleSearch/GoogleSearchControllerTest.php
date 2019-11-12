@@ -11,11 +11,11 @@ class GoogleSearchControllerTest extends TestCase
     use MocksTrait;
 
     /**
-     * Make sure we're getting a View object with the correct data set back from controller
+     * Make sure we're getting a View object with the correct dataset back from controller
      *
      * @return void
      */
-    public function testIndex()
+    public function testResults()
     {
         $search_term = $this->getSearchTerm();
         $website = $this->getWebsite();
@@ -40,5 +40,23 @@ class GoogleSearchControllerTest extends TestCase
             'website' => $website,
             'total_searched' => $limit
         ]);
+    }
+
+    /**
+     * Make sure we're getting a View object with the correct dataset back from controller
+     *
+     * @return void
+     */
+    public function testIndex()
+    {
+        $request = $this->mockHttpRequest([]);
+        $service = $this->mockGoogleSearchServiceBasic();
+        $controller = new SearchResultsController($request, $service);
+
+        $result = $controller->index();
+
+        $this->assertInstanceOf(Views\Index::class, $result);
+        $this->assertIsArray($result->getData());
+        $this->assertEquals($result->getData(), []);
     }
 }
